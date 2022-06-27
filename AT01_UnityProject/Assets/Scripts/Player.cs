@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     //Define delegate types and events here
+    public delegate void DirectionalInputDelegate(char c);
+
+    public event DirectionalInputDelegate InputEvent = delegate { };
 
     public Node CurrentNode { get; private set; }
     public Node TargetNode { get; private set; }
@@ -30,9 +33,39 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (moving == false)
         {
             //Implement inputs and event-callbacks here
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                float axis = Input.GetAxis("Vertical");
+                if (axis > 0)
+                {
+                    InputEvent.Invoke('u');
+                }
+                else if (axis < 0)
+                {
+                    InputEvent.Invoke('d');
+                }
+
+            }
+            else if (Input.GetAxis("Horizontal") != 0)
+            {
+         
+                    float axis = Input.GetAxis("Horizontal");
+              
+                if (axis > 0)
+                {
+                    
+                        InputEvent.Invoke('r');
+                }
+                else if (axis < 0)
+                {
+  
+                        InputEvent.Invoke('l');
+                }
+            }
         }
         else
         {
@@ -49,6 +82,13 @@ public class Player : MonoBehaviour
     }
 
     //Implement mouse interaction method here
+    public void MouseInput(string s)
+    {
+        if(moving == false)
+        {
+            InputEvent.Invoke(s[0]);
+        }
+    }
 
     /// <summary>
     /// Sets the players target node and current directon to the specified node.
@@ -64,5 +104,4 @@ public class Player : MonoBehaviour
             moving = true;
         }
     }
-    //create a UI widget
 }

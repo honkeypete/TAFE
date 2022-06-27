@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
 
     public Node[] Nodes { get { return nodes; } }
-    public Player Player { get { return player; } }
+   public Player Player { get { return player; } }
 
     public static GameManager Instance { get; private set; }
 

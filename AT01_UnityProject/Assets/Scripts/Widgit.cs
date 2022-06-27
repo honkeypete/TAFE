@@ -74,15 +74,16 @@ public class Widgit : MonoBehaviour
                 {
                     foreach (Node node in player.CurrentNode.Parents[0].Children)
                     {
-                        if (node.transform.position.x == player.CurrentNode.transform.position.x - 10)
+                        if (node.transform.position.x == player.CurrentNode.transform.position.x + 10)
                         {
 
                             player.MoveToNode(node);
-                            icons[0].color = Color.green;
+                            icons[1].color = Color.green;
                             return;
                         }
                     }
                 }
+                icons[1].color = Color.red;
                 break;
             case 'u':
                 if(player.CurrentNode.Parents.Length > 0 && player.CurrentNode.Parents[0].Parents.Length > 0)
